@@ -19,30 +19,69 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(elementRef) {
-                    this.price = "hi";
+                function AppComponent() {
+                    this.tweet = "hi";
                     this.socket = null;
-                    this.filterVal = '';
-                    this.elementRef = elementRef;
+                    this.filterVal = 'swag';
+                    this.oldTweet = "nothing";
+                    this.data = {};
                     this.socket = io('http://localhost:8000');
                     this.socket.on('tweetStream', function (data) {
+                        // if(data.place){
+                        //     console.log(data.place.full_name)
+                        // }
+                        console.log(data.state, data.text);
+                        // console.log(data.geo)
+                        // console.log(data.user.location)
+                        // console.log(data)
+                        this.oldTweet = this.tweet;
                         this.tweet = data;
+                        console.log(this.tweet.stateCount);
+                        this.data[data.state] = {
+                            fillKey: this.tweet.fillKey,
+                            numberOfTweets: this.tweet.stateCount,
+                            lastTweet: data.text
+                        };
                     }.bind(this));
-                    this.graphData = [10, 20, 30, 40];
                 }
                 AppComponent.prototype.filter = function () {
                     this.socket.emit('newFilter', this.filterVal);
                     this.filterVal = '';
                 };
                 AppComponent.prototype.ngAfterViewInit = function () {
-                    new Datamap({ element: document.getElementById('container') });
+                    this.rendered = true;
+                    this.map = new Datamap({
+                        element: document.getElementById('container'),
+                        scope: 'usa',
+                        fills: {
+                            HIGH: '#afafaf',
+                            LOW: '#123456',
+                            MEDIUM: 'blue',
+                            UNKNOWN: 'rgb(0,0,0)',
+                            defaultFill: 'white'
+                        },
+                        data: this.data,
+                        geographyConfig: {
+                            popupTemplate: function (geo, data) {
+                                return ['<div class="hoverinfo"><strong>',
+                                    'Number of things in ' + geo.properties.name,
+                                    ': ' + data.numberOfTweets + ' ' + data.lastTweet,
+                                    '</strong></div>'].join('');
+                            }
+                        }
+                    });
+                };
+                AppComponent.prototype.ngDoCheck = function () {
+                    if (this.tweet !== this.oldTweet && this.rendered) {
+                        this.map.updateChoropleth(this.data);
+                    }
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'auction-app',
                         templateUrl: 'templates/product.html'
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef])
+                    __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());
