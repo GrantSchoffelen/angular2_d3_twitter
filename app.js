@@ -81,9 +81,12 @@ let stateCount = {
     "WY": 0
 };
 
+
+
 // locations: '-124.848974, 24.396308, -66.885444, 49.384358'
 var tweet = 100,
-filter = 'apple';
+filter = 'apple, android';
+
 const states = new RegExp(/AL|Alabama|AK|Alaska|AZ|Arizona|AR|Arkansas|CA|California|CO|Colorado|CT|Connecticut|DE|Delaware|FL|Florida|GA|Georgia|HI|Hawaii|ID|Idaho|IL|Illinois|IN|Indiana|IA|Iowa|KS|Kansas|KY|Kentucky|LA|Louisiana|ME|Maine|MD|Maryland|MA|Massachusetts|MI|Michigan|MN|Minnesota|MS|Mississippi|MO|Missouri|MT|Montana|NE|Nebraska|NV|Nevada|NH|New Hampshire|NJ|New Jersey|NM|New Mexico|NY|New York|NC|North Carolina|ND|North Dakota|OH|Ohio|OK|Oklahoma|OR|Oregon|PA|Pennsylvania|RI|Rhode Island|SC|South Carolina|SD|South Dakota|TN|Tennessee|TX|Texas|UT|Utah|VT|Vermont|VA|Virginia|WA|Washington|WV|West Virginia|WI|Wisconsin|WY|Wyoming/);
 
 function twitterStream(socket, _filter){
@@ -93,8 +96,9 @@ function twitterStream(socket, _filter){
             if(tweet.place){
                 if(tweet.place.full_name){
                     let tweetState = tweet.place.full_name.match(states);
-                    console.log(tweetState)
                     if(tweetState){
+                        //search text for
+                        // tweet.text.search(_filter.split(',')[0])
                         tweet.state = tweetState[0];
                         stateCount[tweet.state] += 1;
                         tweet.stateCount = stateCount[tweet.state];
@@ -108,7 +112,7 @@ function twitterStream(socket, _filter){
                          tweet.fillKey ="HIGH";
                         }
                         // socket.emit('tweetStream', tweet);
-                        socket.broadcast.emit('tweetStream', tweet);
+                        // socket.broadcast.emit('tweetStream', tweet);
                     }
                 }
             }
