@@ -10,7 +10,7 @@ export class AppComponent {
     tweet: string = "hi";
     graphData: Array<number>;
     socket = null;
-    filterVal = 'swag';
+    filterVal = '';
     oldTweet = "nothing";
 
     constructor() {
@@ -47,9 +47,9 @@ export class AppComponent {
             element: document.getElementById('container'),
             scope: 'usa',
             fills: {
-                HIGH: '#afafaf',
-                LOW: '#123456',
-                MEDIUM: 'blue',
+                HIGH: '#d50000',
+                MEDIUM: '#2196F3',
+                LOW: '#ffcdd2',
                 UNKNOWN: 'rgb(0,0,0)',
                 defaultFill: 'black'
             },

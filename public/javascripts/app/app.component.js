@@ -22,7 +22,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function AppComponent() {
                     this.tweet = "hi";
                     this.socket = null;
-                    this.filterVal = 'swag';
+                    this.filterVal = '';
                     this.oldTweet = "nothing";
                     this.data = {};
                     this.socket = io('http://localhost:8000');
@@ -54,11 +54,11 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         element: document.getElementById('container'),
                         scope: 'usa',
                         fills: {
-                            HIGH: '#afafaf',
-                            LOW: '#123456',
-                            MEDIUM: 'blue',
+                            HIGH: '#d50000',
+                            MEDIUM: '#2196F3',
+                            LOW: '#ffcdd2',
                             UNKNOWN: 'rgb(0,0,0)',
-                            defaultFill: 'white'
+                            defaultFill: 'black'
                         },
                         data: this.data,
                         geographyConfig: {
