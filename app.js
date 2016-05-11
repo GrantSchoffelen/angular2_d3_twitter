@@ -20,99 +20,113 @@ var client = new twitter(config.get('twitter'));
 server.listen(8000);
 io.set("origins", "*:*");
 let stateCount = {
-    "AL": 0,
-    "AK": 0,
-    "AS": 0,
-    "AZ": 0,
-    "AR": 0,
-    "CA": 0,
-    "CO": 0,
-    "CT": 0,
-    "DE": 0,
-    "DC": 0,
-    "FM": 0,
-    "FL": 0,
-    "GA": 0,
-    "GU": 0,
-    "HI": 0,
-    "ID": 0,
-    "IL": 0,
-    "IN": 0,
-    "IA": 0,
-    "KS": 0,
-    "KY": 0,
-    "LA": 0,
-    "ME": 0,
-    "MH": 0,
-    "MD": 0,
-    "MA": 0,
-    "MI": 0,
-    "MN": 0,
-    "MS": 0,
-    "MO": 0,
-    "MT": 0,
-    "NE": 0,
-    "NV": 0,
-    "NH": 0,
-    "NJ": 0,
-    "NM": 0,
-    "NY": 0,
-    "NC": 0,
-    "ND": 0,
-    "MP": 0,
-    "OH": 0,
-    "OK": 0,
-    "OR": 0,
-    "PW": 0,
-    "PA": 0,
-    "PR": 0,
-    "RI": 0,
-    "SC": 0,
-    "SD": 0,
-    "TN": 0,
-    "TX": 0,
-    "UT": 0,
-    "VT": 0,
-    "VI": 0,
-    "VA": 0,
-    "WA": 0,
-    "WV": 0,
-    "WI": 0,
-    "WY": 0
+    "AL": {count: 0, filter1: 0, filter2:0},
+    "AK": {count: 0, filter1: 0, filter2:0},
+    "AS": {count: 0, filter1: 0, filter2:0},
+    "AZ": {count: 0, filter1: 0, filter2:0},
+    "AR": {count: 0, filter1: 0, filter2:0},
+    "CA": {count: 0, filter1: 0, filter2:0},
+    "CO": {count: 0, filter1: 0, filter2:0},
+    "CT": {count: 0, filter1: 0, filter2:0},
+    "DE": {count: 0, filter1: 0, filter2:0},
+    "DC": {count: 0, filter1: 0, filter2:0},
+    "FM": {count: 0, filter1: 0, filter2:0},
+    "FL": {count: 0, filter1: 0, filter2:0},
+    "GA": {count: 0, filter1: 0, filter2:0},
+    "GU": {count: 0, filter1: 0, filter2:0},
+    "HI": {count: 0, filter1: 0, filter2:0},
+    "ID": {count: 0, filter1: 0, filter2:0},
+    "IL": {count: 0, filter1: 0, filter2:0},
+    "IN": {count: 0, filter1: 0, filter2:0},
+    "IA": {count: 0, filter1: 0, filter2:0},
+    "KS": {count: 0, filter1: 0, filter2:0},
+    "KY": {count: 0, filter1: 0, filter2:0},
+    "LA": {count: 0, filter1: 0, filter2:0},
+    "ME": {count: 0, filter1: 0, filter2:0},
+    "MH": {count: 0, filter1: 0, filter2:0},
+    "MD": {count: 0, filter1: 0, filter2:0},
+    "MA": {count: 0, filter1: 0, filter2:0},
+    "MI": {count: 0, filter1: 0, filter2:0},
+    "MN": {count: 0, filter1: 0, filter2:0},
+    "MS": {count: 0, filter1: 0, filter2:0},
+    "MO": {count: 0, filter1: 0, filter2:0},
+    "MT": {count: 0, filter1: 0, filter2:0},
+    "NE": {count: 0, filter1: 0, filter2:0},
+    "NV": {count: 0, filter1: 0, filter2:0},
+    "NH": {count: 0, filter1: 0, filter2:0},
+    "NJ": {count: 0, filter1: 0, filter2:0},
+    "NM": {count: 0, filter1: 0, filter2:0},
+    "NY": {count: 0, filter1: 0, filter2:0},
+    "NC": {count: 0, filter1: 0, filter2:0},
+    "ND": {count: 0, filter1: 0, filter2:0},
+    "MP": {count: 0, filter1: 0, filter2:0},
+    "OH": {count: 0, filter1: 0, filter2:0},
+    "OK": {count: 0, filter1: 0, filter2:0},
+    "OR": {count: 0, filter1: 0, filter2:0},
+    "PW": {count: 0, filter1: 0, filter2:0},
+    "PA": {count: 0, filter1: 0, filter2:0},
+    "PR": {count: 0, filter1: 0, filter2:0},
+    "RI": {count: 0, filter1: 0, filter2:0},
+    "SC": {count: 0, filter1: 0, filter2:0},
+    "SD": {count: 0, filter1: 0, filter2:0},
+    "TN": {count: 0, filter1: 0, filter2:0},
+    "TX": {count: 0, filter1: 0, filter2:0},
+    "UT": {count: 0, filter1: 0, filter2:0},
+    "VT": {count: 0, filter1: 0, filter2:0},
+    "VI": {count: 0, filter1: 0, filter2:0},
+    "VA": {count: 0, filter1: 0, filter2:0},
+    "WA": {count: 0, filter1: 0, filter2:0},
+    "WV": {count: 0, filter1: 0, filter2:0},
+    "WI": {count: 0, filter1: 0, filter2:0},
+    "WY": {count: 0, filter1: 0, filter2:0}
 };
 
 
 
 // locations: '-124.848974, 24.396308, -66.885444, 49.384358'
 var tweet = 100,
-filter = 'apple, android';
+filter = 'nj, ny';
 
 const states = new RegExp(/AL|Alabama|AK|Alaska|AZ|Arizona|AR|Arkansas|CA|California|CO|Colorado|CT|Connecticut|DE|Delaware|FL|Florida|GA|Georgia|HI|Hawaii|ID|Idaho|IL|Illinois|IN|Indiana|IA|Iowa|KS|Kansas|KY|Kentucky|LA|Louisiana|ME|Maine|MD|Maryland|MA|Massachusetts|MI|Michigan|MN|Minnesota|MS|Mississippi|MO|Missouri|MT|Montana|NE|Nebraska|NV|Nevada|NH|New Hampshire|NJ|New Jersey|NM|New Mexico|NY|New York|NC|North Carolina|ND|North Dakota|OH|Ohio|OK|Oklahoma|OR|Oregon|PA|Pennsylvania|RI|Rhode Island|SC|South Carolina|SD|South Dakota|TN|Tennessee|TX|Texas|UT|Utah|VT|Vermont|VA|Virginia|WA|Washington|WV|West Virginia|WI|Wisconsin|WY|Wyoming/);
 
 function twitterStream(socket, _filter){
-    client.stream('statuses/filter', { track: _filter, locations: '-124.848974, 24.396308, -66.885444, 49.384358' }, function(stream) {
+    client.stream('statuses/filter', { track: _filter }, function(stream) {
         stream.on('data', function(_tweet) {
             tweet = _tweet
+            tweet.text = tweet.text.toLowerCase();
             if(tweet.place){
                 if(tweet.place.full_name){
                     let tweetState = tweet.place.full_name.match(states);
                     if(tweetState){
-                        //search text for
-                        // tweet.text.search(_filter.split(',')[0])
                         tweet.state = tweetState[0];
-                        stateCount[tweet.state] += 1;
-                        tweet.stateCount = stateCount[tweet.state];
-                        if(tweet.stateCount < 5){
-                            tweet.fillKey ="LOW";
+
+console.log(tweet.text.search(_filter.split(',')[0]))
+
+                        stateCount[tweet.state]['count'] += 1;
+                        if(tweet.text.search(_filter.split(',')[0]) !== -1){
+                            stateCount[tweet.state]['filter1'] += 1;
+                            console.log('hit filter 1')
                         }
-                        else if(tweet.stateCount > 5 && tweet.stateCount < 10){
+                        if(tweet.text.search(_filter.split(',')[1]) !== -1){
+                            stateCount[tweet.state]['filter2'] += 1;
+                            console.log('hit filter 2')
+                        }
+
+                        tweet.stateCount = stateCount[tweet.state]['count'];
+                        tweet.filter1 = stateCount[tweet.state]['filter1'];
+                        tweet.filter2 = stateCount[tweet.state]['filter2'];
+                        if(tweet.filter1 < tweet.filter2){
+                            tweet.fillKey ="HIGH";
+                        }
+                        else if(tweet.filter1 > tweet.filter2){
                             tweet.fillKey ="MEDIUM";
                         }
                         else{
-                         tweet.fillKey ="HIGH";
+                         tweet.fillKey ="LOW";
                         }
-                        // socket.emit('tweetStream', tweet);
-                        // socket.broadcast.emit('tweetStream', tweet);
+
+
+                        socket.broadcast.emit('tweetStream', tweet);
                     }
                 }
             }

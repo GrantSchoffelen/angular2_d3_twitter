@@ -49,14 +49,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.filterVal = '';
                 };
                 AppComponent.prototype.ngAfterViewInit = function () {
+                    console.log('hit');
                     this.rendered = true;
                     this.map = new Datamap({
                         element: document.getElementById('container'),
                         scope: 'usa',
                         fills: {
-                            HIGH: '#d50000',
-                            MEDIUM: '#2196F3',
-                            LOW: '#ffcdd2',
+                            HIGH: 'blue',
+                            MEDIUM: 'red',
+                            LOW: 'black',
                             UNKNOWN: 'rgb(0,0,0)',
                             defaultFill: 'black'
                         },

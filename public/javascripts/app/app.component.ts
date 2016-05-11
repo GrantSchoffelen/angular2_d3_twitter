@@ -42,14 +42,15 @@ export class AppComponent {
     }
 
     ngAfterViewInit(){
+        console.log('hit')
         this.rendered = true;
         this.map = new Datamap({
             element: document.getElementById('container'),
             scope: 'usa',
             fills: {
-                HIGH: '#d50000',
-                MEDIUM: '#2196F3',
-                LOW: '#ffcdd2',
+                HIGH: 'blue',
+                MEDIUM: 'red',
+                LOW: 'black',
                 UNKNOWN: 'rgb(0,0,0)',
                 defaultFill: 'black'
             },
